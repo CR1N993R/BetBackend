@@ -5,12 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Game {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -24,4 +26,11 @@ public class Game {
     private int scoreTeamA;
     private int scoreTeamB;
     private String sport;
+
+    public Game(String teamA, String teamB, LocalDateTime date, String sport) {
+        this.teamA = teamA;
+        this.teamB = teamB;
+        this.date = date;
+        this.sport = sport;
+    }
 }

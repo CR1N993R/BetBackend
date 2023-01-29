@@ -39,6 +39,12 @@ public class BetController {
     @GetMapping("{gameId}")
     public ResponseEntity<Bet> getBetByUserAndGame(@PathVariable String gameId, @RequestHeader String key) {
         String state = camundaService.getCurrentStateOfProcess(key).getName();
+        if (state.equals("Game List")) {
+            User user = userService.getUserById(camundaService.getVariableFromProcess("userId", key));
+            Bet bet = betService.getByUserIdAndGameId(user.getId(), gameId);
+            camundaService.completeTask(key, "case", "none");
+            return ResponseEntity.status(HttpStatus.OK).body(bet);
+        }
         if (state.equals("Game View")) {
             User user = userService.getUserById(camundaService.getVariableFromProcess("userId", key));
             Bet bet = betService.getByUserIdAndGameId(user.getId(), gameId);

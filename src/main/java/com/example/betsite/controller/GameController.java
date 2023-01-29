@@ -41,8 +41,8 @@ public class GameController {
     @GetMapping("{gameId}")
     public ResponseEntity<Game> getGameById(@RequestHeader String key, @PathVariable String gameId) {
         String state = camundaService.getCurrentStateOfProcess(key).getName();
-        if (state.equals("Game List")) {
-            camundaService.completeTask(key, "case", "else");
+        if (state.equals("Game View") || state.equals("Game List")) {
+            //camundaService.completeTask(key, "case", "else");
             return ResponseEntity.status(HttpStatus.OK).body(gameService.getGameById(gameId));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
@@ -54,7 +54,7 @@ public class GameController {
         String state = camundaService.getCurrentStateOfProcess(key).getName();
         User user = userService.getUserById(userId);
         if (state.equals("Game List") && user.isAdmin()) {
-            // TODO
+            gameService.saveGame(gameDTO);
         }
     }
 }
