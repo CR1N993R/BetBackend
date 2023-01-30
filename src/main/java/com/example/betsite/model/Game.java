@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
@@ -22,8 +23,11 @@ public class Game {
     private String teamA;
     private String teamB;
     private LocalDateTime date;
+    @Setter
     private boolean done;
+    @Setter
     private int scoreTeamA;
+    @Setter
     private int scoreTeamB;
     private String sport;
 

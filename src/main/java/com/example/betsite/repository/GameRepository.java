@@ -11,4 +11,5 @@ import java.util.List;
 public interface GameRepository extends JpaRepository<Game, String> {
     Game getGameById(String id);
     List<Game> getGamesByDateAfter(LocalDateTime date);
+    List<Game> getGamesByDateBeforeAndDoneEquals(LocalDateTime date, boolean done);
 }

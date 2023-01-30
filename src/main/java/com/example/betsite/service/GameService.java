@@ -18,11 +18,19 @@ public class GameService {
         return gameRepository.getGamesByDateAfter(LocalDateTime.now());
     }
 
+    public List<Game> getGamesBefore() {
+        return gameRepository.getGamesByDateBeforeAndDoneEquals(LocalDateTime.now(), false);
+    }
+
     public Game getGameById(String id) {
         return gameRepository.getGameById(id);
     }
 
     public void saveGame(GameDTO gameDTO) {
         gameRepository.saveAndFlush(new Game(gameDTO.teamA, gameDTO.teamB, gameDTO.date, gameDTO.sport));
+    }
+
+    public void saveGame(Game game) {
+        gameRepository.saveAndFlush(game);
     }
 }
